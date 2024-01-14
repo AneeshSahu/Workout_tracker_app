@@ -26,7 +26,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.constraintlayout.compose.ConstraintLayoutScope
 import androidx.core.content.ContextCompat.startActivity
 import com.example.fitness.ui.theme.FitnessTheme
 
@@ -98,7 +97,6 @@ fun WorkoutCard (name: String, weights : List<Float>, reps : List<Int>){
         modifier = Modifier
             .padding(all = 15.dp)
             .fillMaxWidth()
-            //.defaultMinSize(minHeight = 150.dp)
 
     ){
         Row (
@@ -126,14 +124,12 @@ fun WorkoutCard (name: String, weights : List<Float>, reps : List<Int>){
             Column (
                 modifier = Modifier.weight(10F),
                 horizontalAlignment = Alignment.CenterHorizontally
-                //modifier = Modifier.fillMaxWidth()
             ){
                 Text(weights[1].toString())
             }
             Column (
                 modifier = Modifier.weight(10F),
                 horizontalAlignment = Alignment.CenterHorizontally
-                //modifier = Modifier.fillMaxWidth()
             ){
                 Text(weights[2].toString())
             }
@@ -151,14 +147,12 @@ fun WorkoutCard (name: String, weights : List<Float>, reps : List<Int>){
             Column (
                 modifier = Modifier.weight(10F),
                 horizontalAlignment = Alignment.CenterHorizontally
-                //modifier = Modifier.fillMaxWidth()
             ){
                 Text(reps[1].toString())
             }
             Column (
                 modifier = Modifier.weight(10F),
                 horizontalAlignment = Alignment.CenterHorizontally
-                //modifier = Modifier.fillMaxWidth()
             ){
                 Text(reps[2].toString())
             }
