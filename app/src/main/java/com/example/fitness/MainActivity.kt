@@ -28,10 +28,21 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.core.content.ContextCompat.startActivity
 import com.example.fitness.ui.theme.FitnessTheme
+import java.util.Date
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val d = Date(1,1,1)
+
+
+        val db = DB.getDatabase(this)
+        val workoutDao = db.workoutInfoDao()
+        val info: Array<WorkoutInfo> = workoutDao.WorkoutInfoFromDate(date = d)
+
+
+
+
 
         setContent {
             FitnessTheme {
@@ -48,6 +59,7 @@ class MainActivity : ComponentActivity() {
                 var reps = mutableListOf<Int>(16,16,16)
 
                 LazyColumn{
+
                     item(){
                         WorkoutCard(name = "bench", weights = weight, reps = reps)
                     }
@@ -56,6 +68,27 @@ class MainActivity : ComponentActivity() {
                     }
                     item(){
                         WorkoutCard(name = "bench", weights = weight, reps = reps)
+                    }
+                    for(i in info){
+                        weight.removeAt(0)
+                        weight.removeAt(0)
+                        weight.removeAt(0)
+                        reps.removeAt(0)
+                        reps.removeAt(0)
+                        reps.removeAt(0)
+
+                        weight.add(i.weight1)
+                        weight.add(i.weight2)
+                        weight.add(i.weight3)
+                        reps.add(i.set1reps)
+                        reps.add(i.set2reps)
+                        reps.add(i.set3reps)
+
+                        item(){
+                            WorkoutCard(name = i.name, weights = weight, reps = reps)
+                        }
+
+
                     }
                 }
 

@@ -30,9 +30,11 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.example.fitness.ui.theme.FitnessTheme
+import java.util.Date
 
 class CardDataUpdate : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContent {
             FitnessTheme {
@@ -61,14 +63,28 @@ fun AddButton(cardDataUpdate: CardDataUpdate) {
     }
 }
 fun swapActivity(cardDataUpdate: CardDataUpdate) {
+
+    val db = DB.getDatabase(cardDataUpdate)
+    val workoutDao = db.workoutInfoDao()
+    workoutDao.insert(WorkoutInfo(Date(1,1,1),"Squat",8,8,8,135F,135F,145F))
+
+
     val intent = Intent(cardDataUpdate,MainActivity::class.java)
     ContextCompat.startActivity(cardDataUpdate, intent, null)
 }
 
-
 @Composable
 fun WorkoutCardUpdate (){
-    var text by rememberSaveable { mutableStateOf("") }
+    var name by rememberSaveable { mutableStateOf("") }
+    var weight1 by rememberSaveable { mutableStateOf("") }
+    var weight2 by rememberSaveable { mutableStateOf("") }
+    var weight3 by rememberSaveable { mutableStateOf("") }
+    var rep1 by rememberSaveable { mutableStateOf("") }
+    var rep2 by rememberSaveable { mutableStateOf("") }
+    var rep3 by rememberSaveable { mutableStateOf("") }
+
+
+
     Card (
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer
@@ -90,8 +106,8 @@ fun WorkoutCardUpdate (){
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 OutlinedTextField(
-                    value = text,
-                    onValueChange = { text = it },
+                    value = name,
+                    onValueChange = { name = it },
                     singleLine = true,
                 )
             }
@@ -106,8 +122,8 @@ fun WorkoutCardUpdate (){
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 OutlinedTextField(
-                    value = text,
-                    onValueChange = { text = it },
+                    value = weight1,
+                    onValueChange = { weight1 = it },
                     singleLine = true,
                 )
             }
@@ -116,8 +132,8 @@ fun WorkoutCardUpdate (){
                 horizontalAlignment = Alignment.CenterHorizontally
             ){
                 OutlinedTextField(
-                    value = text,
-                    onValueChange = { text = it },
+                    value = weight2,
+                    onValueChange = { weight2 = it },
                     singleLine = true,
                 )
             }
@@ -126,8 +142,8 @@ fun WorkoutCardUpdate (){
                 horizontalAlignment = Alignment.CenterHorizontally
             ){
                 OutlinedTextField(
-                    value = text,
-                    onValueChange = { text = it },
+                    value = weight3,
+                    onValueChange = { weight3 = it },
                     singleLine = true,
                 )
             }
@@ -142,8 +158,8 @@ fun WorkoutCardUpdate (){
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 OutlinedTextField(
-                    value = text,
-                    onValueChange = { text = it },
+                    value = rep1,
+                    onValueChange = { rep1 = it },
                     singleLine = true,
                 )
             }
@@ -152,19 +168,18 @@ fun WorkoutCardUpdate (){
                 horizontalAlignment = Alignment.CenterHorizontally
             ){
                 OutlinedTextField(
-                    value = text,
-                    onValueChange = { text = it },
+                    value = rep2,
+                    onValueChange = { rep2 = it },
                     singleLine = true,
                 )
             }
             Column (
                 modifier = Modifier.weight(10F),
                 horizontalAlignment = Alignment.CenterHorizontally
-                //modifier = Modifier.fillMaxWidth()
             ){
                 OutlinedTextField(
-                    value = text,
-                    onValueChange = { text = it },
+                    value = rep3,
+                    onValueChange = { rep3 = it },
                     singleLine = true,
                 )
             }
